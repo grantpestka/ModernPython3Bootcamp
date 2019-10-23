@@ -13,16 +13,16 @@ if player1 == player2:
 elif player1 == 'rock':
     if player2 == 'paper':
         winner = 'Player2'
-    else:
+    elif player2 == 'sissors':
         winner = 'Player1'
 elif player1 == 'paper':
     if player2 == 'sissors':
         winner = 'Player2'
-    else:
+    elif player2 == 'rock':
         winner = 'Player1'
 elif player1 == 'sissors':
-    if player2 == 'paper':
+    if player2 == 'rock':
         winner = 'Player2'
-    else:
+    elif player2 == 'paper':
         winner = 'Player1'
 print(f'{winner} wins')
