@@ -1,7 +1,9 @@
-for x in range(20):
+# state = ''
+for x in range(0,20):
     if x == 4 or x == 13:
-        print(f'{x} is unlucky')
+        state = 'unlucky'
     elif x%2 == 0:
-        print(f'{x} is even')
+        state = 'even'
     else:
-        print(f'{x} is odd')
+        state = 'odd'
+    print(f'{x} is {state}')
