@@ -3,8 +3,6 @@ import pyfiglet
 from random import randint
 from termcolor import colored
 
-#  ask for a joke topic
-
 def get_dad_joke(topic):
     url = 'https://icanhazdadjoke.com/search'
     response = requests.get(
@@ -12,24 +10,25 @@ def get_dad_joke(topic):
         headers={'Accept': 'application/json'},
         params={'term': f'{topic}'}
     )
-    # print(response.json()['results'])
-    return response.json()['results']
+    return response.json()
 
 def tell_dad_joke(topic):
     jokes = get_dad_joke(topic)
     ji = 0
-    if not jokes:
+    num_jokes = jokes['total_jokes']
+    if num_jokes > 1:
+        print(f'\nI have {num_jokes} of jokes about that! Here\'s one:')
+        ji = randint(0,len(jokes))
+    elif num_jokes == 1:
+        print(f'\nI have a joke about that!') 
+    else:
         print(f'\nSorry, I don\'t have any jokes about {topic}. Ask about something else:\n')
         return ''
-    elif len(jokes) > 1:
-        print(f'\nI have lots of jokes about that! Here\'s one:')
-        ji = randint(0,len(jokes))
-    elif len(jokes) == 1:
-        print(f'\nI have a joke about that!') 
-    return jokes[ji]['joke']
+    return jokes['results'][ji]['joke']
 
-game_title = colored(pyfiglet.figlet_format('Dad Joke Generator'),'red')
-print(game_title)
+header = pyfiglet.figlet_format('Dad Joke Generator')
+header = colored(header,'red')
+print(header)
 print('Let me tell you a joke! Give me a topic:')
 joke = ''
 while not joke:
